@@ -11,6 +11,7 @@ namespace ClientSide.Controllers
         {
             _identityService = identityService;
         }
+
         public IActionResult Index()
         {
             return View();
