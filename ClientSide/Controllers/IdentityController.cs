@@ -16,5 +16,16 @@ namespace ClientSide.Controllers
         {
             return View();
         }
+
+        [HttpGet]
+        [Route("Register")]
+        public IActionResult RegisterByMobile()
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            return View();
+        }
     }
 }
