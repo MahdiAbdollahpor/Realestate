@@ -28,9 +28,7 @@ body {
 
 }
 
-.bodyForm {
-    font-family: Arial, sans-serif;
-    background-color: #e0f7fa; /* پس‌زمینه آبی کم رنگ */
+.body-form {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,12 +36,19 @@ body {
     margin: 0;
 }
 
+.RenderBody {
+    font-family: Arial, sans-serif;
+    background-color: #e0f7fa; /* پس‌زمینه آبی کم رنگ */
+    height: 100vh;
+   
+}
+
 .container {
     background-color: #ffffff;
     padding: 20px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 600px;
+    max-width: 400px;
    /* max-height : 700px;*/
     width: 100%;
     min-width : 400px;
@@ -108,3 +113,22 @@ button {
         .login-link a:hover {
             text-decoration: underline;
         }
+
+.ti-1 {
+    color: #00796b;
+    text-align: center;
+}
+
+.la-1 {
+    color: #00796b;
+    text-align: center;
+}
+
+input[type="text"] {
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 100%;
+    box-sizing: border-box;
+}

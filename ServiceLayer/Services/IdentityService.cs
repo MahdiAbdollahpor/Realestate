@@ -103,5 +103,57 @@ namespace ServiceLayer.Services
             Random random = new Random();
             return random.Next(12345, 99999).ToString();
         }
+
+        public bool IsPhoneNumberExist(string phoneNumber)
+        {
+            //var res = _db.Users.FirstOrDefault(u => u.PhoneNumber == PhoneNumber);
+            //if (res == null)
+            //{
+            //    return false;
+            //}
+            //return true;
+            return _db.Users.Any(u => u.PhoneNumber == phoneNumber);
+        }
+
+        //-100 => کاربر یافت نشد
+        // -50 => کد تایید منقضی شده
+        // -200 => کد تایید تطابق ندارد
+        public int ConfrimPhoneNumber(string phoneNumber, string code)
+        {
+            var user = _db.Users.FirstOrDefault(u => u.PhoneNumber == phoneNumber);
+
+            if (user == null)
+            {
+                return -100;
+            }
+            if (user.ConfrimCodeCreateDate.AddMinutes(15) < DateTime.Now)
+            {
+                return -50;
+            }
+            if (user.ConfrimCode != code)
+            {
+                return -200;
+            }
+            else
+            {
+                user.ConfrimCode = GenerateVerifyCode();
+                user.ConfrimPhoneNumber = true;
+
+                _db.Users.Update(user);
+                _db.SaveChanges();
+                return 1;
+            }
+
+            
+        }
+
+
+        public int GetUserIdByPhoneNumber(string phoneNumber)
+        {
+            var res = _db.Users.FirstOrDefault(u =>u.PhoneNumber == phoneNumber);
+            
+                return res.UserId;
+            
+        }
     }
 }

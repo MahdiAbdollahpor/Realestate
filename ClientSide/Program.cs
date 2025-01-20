@@ -2,6 +2,7 @@ using DataLayer.Context;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using ServiceLayer.PublicClasses;
 using ServiceLayer.Services;
 using ServiceLayer.Services.Interfaces;
 
@@ -42,6 +43,7 @@ builder.Services.Configure<SecurityStampValidatorOptions>(x =>
 builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServer(builder.Configuration.GetConnectionString("MyConnection")));
 
 builder.Services.AddScoped<IIdentityService, IdentityService>();
+builder.Services.AddScoped<ISmsSender, SmsSender>();
 
 var app = builder.Build();
 

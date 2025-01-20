@@ -1,0 +1,25 @@
+﻿@using ServiceLayer.ViewModels.IdentityViewModels
+@model ConfrimPhoneViewModel
+@{
+    ViewData["Title"] = "ConfrimMobile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body-form">
+    <div class="container">
+        <h1 class="ti-1">تایید کد</h1>
+        <form method="post">
+
+            <input asp-for="PhoneNumber" type="hidden" value="@ViewBag.PhoneNumber" />
+
+            <label class="la-1" for="code">کد ارسال شده را وارد کنید  :</label>
+            <input asp-for="code" type="text" id="code" name="code" required>
+            <button type="submit">تایید کنید</button>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"></partial>
+}
+
