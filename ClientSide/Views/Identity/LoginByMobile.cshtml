@@ -1,0 +1,36 @@
+﻿@using ServiceLayer.ViewModels.IdentityViewModels
+@model LoginViewModel
+@{
+    ViewData["Title"] = "LoginByMobile";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="body-form">
+    <div class="container">
+        <form class="register-form" method="post" asp-action="LoginByMobile">
+            <h2>ثبت‌نام</h2>
+            <div class="form-group">
+                <label for="phoneNumber">شماره همراه</label>
+                <input asp-for=PhoneNumber type="text" id="phoneNumber" name="phoneNumber" required minlength="11" maxlength="11">
+                <span asp-validation-for="PhoneNumber" class="error-message">لطفا شماره همراه را وارد نمایید</span>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">رمز عبور</label>
+                <input asp-for=Password type="password" id="password" name="password" required minlength="5" maxlength="20">
+                <span asp-validation-for="Password" class="error-message">لطفا رمز عبور را وارد نمایید</span>
+            </div>
+            
+            <button type="submit">ورود</button>
+        </form>
+        <p class="login-link">برای ثبت‌نام در سایت  <a asp-controller="Identity" asp-action="RegisterByMobile">کلیک شوید</a></p>
+        <p class="login-link">  <a asp-controller="Identity" asp-action="ForgotPassword">فراموشی رمز عبور</a></p>
+    </div>
+
+</div>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"></partial>
+}
+

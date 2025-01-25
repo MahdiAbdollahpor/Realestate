@@ -1,5 +1,6 @@
 ﻿using DataLayer.Context;
 using DataLayer.Models.Identity;
+using Microsoft.EntityFrameworkCore;
 using ServiceLayer.PublicClasses;
 using ServiceLayer.Services.Interfaces;
 using ServiceLayer.ViewModels.IdentityViewModels;
@@ -152,8 +153,105 @@ namespace ServiceLayer.Services
         {
             var res = _db.Users.FirstOrDefault(u =>u.PhoneNumber == phoneNumber);
             
-                return res.UserId;
+            return res.UserId;
             
+        }
+
+        //-100 => کاربر وجود ندارد
+        //-50 => پسورد اشتباه است
+        // -150 => حساب کاربری فعال نیست
+        // -200 =>کاربر حذف شده است
+        public int GetUserStatusForLoginByPhoneNumber(string phoneNumber ,string password)
+        {
+            var res = _db.Users.FirstOrDefault(u => u.PhoneNumber == phoneNumber);
+
+            if(res == null)
+            {
+                return -100;
+            }
+            if(res.Password!=password)
+            {
+                return -50;
+            }
+            if(res.ConfrimPhoneNumber == false)
+            {
+                return -150;
+            }
+            if(res.IsDeleted == true)
+            {
+                return -200;
+            }
+
+            return -1;
+        }
+
+        public int GetPhoneNumberStatusForForgotPass(string PhoneNumber)
+        {
+
+
+            var user = _db.Users.FirstOrDefault(x => x.PhoneNumber == PhoneNumber);
+
+            if (user == null)
+            {
+                return -100;
+
+            }
+            if (user.IsDeleted == true)
+            {
+                return -50;
+            }
+            if (user.ConfrimPhoneNumber == false)
+            {
+                return -200;
+            }
+
+            else
+            {
+                user.ConfrimCode = GenerateVerifyCode();
+                user.ConfrimCodeCreateDate = DateTime.Now;
+
+                bool res = _smsSender.SendSms(2, user.PhoneNumber, user.DisplayName, user.ConfrimCode);
+
+
+                if (res == true)
+                {
+                    _db.Users.Update(user);
+                _db.SaveChanges();
+                return 1;
+                }
+            }
+            return -1;
+
+        }
+
+        public int ResetPasswordByMobile(RsetPasswordViewModel model)
+        {
+            var user = _db.Users.FirstOrDefault(x => x.PhoneNumber == model.PhoneNumber);
+
+            if (user == null)
+            {
+                return -100;
+            }
+            if (user.ConfrimCodeCreateDate.AddMinutes(15) < DateTime.Now)
+            {
+                return -50;
+            }
+            if (user.ConfrimCode != model.Code)
+            {
+                return -200;
+            }
+            else
+            {
+                user.ConfrimCode = GenerateVerifyCode();
+                user.ConfrimCodeCreateDate = DateTime.Now;
+                user.Password = PasswordHelper.EncodePasswordMd5(model.Password);
+
+                _db.Users.Update(user);
+                _db.SaveChanges();
+                return 1;
+            }
+
+            return -1;
         }
     }
 }

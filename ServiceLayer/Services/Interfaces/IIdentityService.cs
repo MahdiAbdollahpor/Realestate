@@ -14,5 +14,8 @@ namespace ServiceLayer.Services.Interfaces
         bool IsPhoneNumberExist(string PhoneNumber);
         int ConfrimPhoneNumber(string phoneNumber, string code);
         int GetUserIdByPhoneNumber(string phoneNumber);
+        int GetUserStatusForLoginByPhoneNumber(string phoneNumber, string password);
+        int GetPhoneNumberStatusForForgotPass(string PhoneNumber);
+        int ResetPasswordByMobile(RsetPasswordViewModel model);
     }
 }
