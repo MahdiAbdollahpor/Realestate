@@ -17,5 +17,8 @@ namespace ServiceLayer.Services.Interfaces
         int GetUserStatusForLoginByPhoneNumber(string phoneNumber, string password);
         int GetPhoneNumberStatusForForgotPass(string PhoneNumber);
         int ResetPasswordByMobile(RsetPasswordViewModel model);
+        string GetDisplayNameByPhoneNumber(string phone);
+        bool CheckPermission(int permissionId, string phoneNumber);
+        UserInfoForUserPanelViewModel GetUserInfoForUserPanel(string phoneNumber);
     }
 }

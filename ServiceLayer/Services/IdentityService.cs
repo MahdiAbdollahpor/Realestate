@@ -40,7 +40,7 @@ namespace ServiceLayer.Services
                 };
 
                 //todo => send sms
-                _smsSender.SendSms(1, user.PhoneNumber, user.DisplayName, user.ConfrimCode);
+                //_smsSender.SendSms(1, user.PhoneNumber, user.DisplayName, user.ConfrimCode);
 
                 _db.Users.Add(user);
                 _db.SaveChanges();
@@ -67,7 +67,7 @@ namespace ServiceLayer.Services
 
                 //todo => send sms
 
-                _smsSender.SendSms(1, user.PhoneNumber, user.DisplayName, user.ConfrimCode);
+               // _smsSender.SendSms(1, user.PhoneNumber, user.DisplayName, user.ConfrimCode);
 
                 _db.Update(user);
                 _db.SaveChanges();
@@ -169,7 +169,7 @@ namespace ServiceLayer.Services
             {
                 return -100;
             }
-            if(res.Password!=password)
+            if(res.Password!= PasswordHelper.EncodePasswordMd5(password))
             {
                 return -50;
             }
@@ -252,6 +252,52 @@ namespace ServiceLayer.Services
             }
 
             return -1;
+        }
+
+        public string GetDisplayNameByPhoneNumber(string phone)
+        {
+            return _db.Users.FirstOrDefault(x => x.PhoneNumber == phone).DisplayName;
+        }
+
+        public bool CheckPermission(int permissionId, string phoneNumber)
+        {
+            int userId = _db.Users.FirstOrDefault(u => u.PhoneNumber == phoneNumber).UserId;
+
+            List<int> roleIds = _db.UserRoles.Where(x => x.UserId == userId).Select(x => x.RoleId).ToList();
+
+            bool flag = false;
+
+            if (!roleIds.Any())
+            {
+                flag = false;
+            }
+            else
+            {
+                foreach (int roleId in roleIds)
+                {
+                    foreach (var _rolePermission in _db.RolePermissions.Where(x => x.RoleId == roleId).ToList())
+                    {
+                        if (_rolePermission.PermissionId == permissionId)
+                        {
+                            flag = true;
+                        }
+                    }
+                }
+            }
+
+            return flag;
+
+        }
+
+        public UserInfoForUserPanelViewModel GetUserInfoForUserPanel(string phoneNumber)
+        {
+            return _db.Users.Where(x => x.PhoneNumber == phoneNumber).Select(x => new UserInfoForUserPanelViewModel
+            {
+                DispalyName = x.DisplayName,
+                PhoneNumber = x.PhoneNumber,
+                RegisterTime = MyDateTime.GetShamsiDateFromGregorian(x.RegisterTime, false),
+                UserId = x.UserId
+            }).FirstOrDefault();
         }
     }
 }

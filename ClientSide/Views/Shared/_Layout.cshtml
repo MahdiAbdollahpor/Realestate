@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using ServiceLayer.Services.Interfaces
+@inject IIdentityService _identityService;
+<!DOCTYPE html>
 <html lang="fa">
 <head>
     <meta charset="utf-8" />
@@ -36,9 +38,25 @@
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Identity" asp-action="RegisterByMobile">عضویت/ورود</a>
-                        </li>
+
+                            @if (!User.Identity.IsAuthenticated)
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Identity" asp-action="LoginByMobile">عضویت/ورود</a>
+                                </li>
+
+                            }
+                            else
+                            {
+                                <li class="nav-item ">
+                                    <a asp-controller="UserPanel" asp-action="Dashboard" class="nav-link text-dark">
+                                        
+                                        @_identityService.GetDisplayNameByPhoneNumber(User.Identity.Name)
+                                    </a>
+                                </li>
+                            }
+
+                        
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                         </li>
