@@ -1,143 +1,22 @@
-﻿*{
-    direction: rtl
-}
-
-html {
-  font-size: 14px;
+﻿html {
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
-
-
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
-
-}
-
-.body-form {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    margin: 0;
-}
-
-.RenderBody {
-    font-family: Arial, sans-serif;
-    background-color: #e0f7fa; /* پس‌زمینه آبی کم رنگ */
-    height: 100vh;
-   
-}
-
-.container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 400px;
-   /* max-height : 700px;*/
-    width: 100%;
-    min-width : 400px;
-    
-}
-
-.register-form h2 {
-    margin-bottom: 20px;
-    text-align: center;
-    color: #00796b; /* رنگ عنوان فیروزه‌ای */
-}
-
-.form-group {
-    margin-bottom: 15px;
-}
-
-    .form-group label {
-        display: block;
-        margin-bottom: 5px;
-        color: #00796b; /* رنگ برچسب‌ها فیروزه‌ای */
-    }
-
-    .form-group input {
-        width: 100%;
-        padding: 10px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
-    }
-
-    .form-group .error-message {
-        display: none;
-        color: red;
-        font-size: 12px;
-    }
-
-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #4fc3f7; /* رنگ دکمه آبی آسمانی */
-    border: none;
-    border-radius: 5px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-}
-
-    button:hover {
-        background-color: #0288d1; /* رنگ دکمه در حالت هاور آبی تیره‌تر */
-    }
-
-.login-link {
-    text-align: center;
-    margin-top: 20px;
-}
-
-    .login-link a {
-        color: #0288d1; /* رنگ لینک آبی تیره */
-        text-decoration: none;
-        font-size: 18px; /* اندازه فونت بزرگتر */
-    }
-
-        .login-link a:hover {
-            text-decoration: underline;
-        }
-
-.ti-1 {
-    color: #00796b;
-    text-align: center;
-}
-
-.la-1 {
-    color: #00796b;
-    text-align: center;
-}
-
-input[type="text"] {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
-}
-
-input[type="password"] {
-    padding: 10px;
-    margin: 10px 0;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 100%;
-    box-sizing: border-box;
+    margin-bottom: 60px;
 }

@@ -1,0 +1,107 @@
+﻿@using ServiceLayer.Services.Interfaces
+@inject IIdentityService _identityService
+
+@{
+    var userinfo = _identityService.GetDisplayNameByPhoneNumber(User.Identity.Name);
+}
+<div class="col-lg-3">
+    <div class="ui-boxs">
+        <div class="ui-box">
+            <div class="ui-box-item">
+                <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
+                    <div class="dashboard-user-img-profile">
+                        <img src="/appdata/user/avatar/" width="80" height="80" class="img-fluid rounded-circle" alt="@userinfo">
+                    </div>
+                    <div class="dashboard-user-info">
+                        <h6 class="user-name">@userinfo</h6>
+                        @* <h6 class="text-muted user-number">09338492205</h6>*@
+                    </div>
+                    <div class="dashboard-user-btn">
+                        <div>
+                            <i class="bi bi-key"></i>
+                            <a href="#" class="text-muted">تغییر رمز عبور</a>
+                        </div>
+                        <div>
+                            <i class="bi bi-arrow-left-circle"></i>
+                            <a asp-area="" asp-controller="identity" asp-action="SignOut" class="text-muted">خروج از حساب</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="ui-box">
+            <div class="ui-box-item">
+                <div class="ui-box-item-title" style="padding: 15px;">
+                    <h4 class="fw-bold">
+                        حساب کاربری شما
+                    </h4>
+                </div>
+                <div class="ui-box-item-desc p-0">
+                    <ul class="nav flex-column sidebar-menu">
+                        <li class="nav-item">
+                            <a asp-controller="UserPanel" asp-action="Dashboard" class="nav-link text-muted">
+                                <i class="bi bi-person-circle"></i>
+                                <span>ناحیه کاربری</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="UserPanel" asp-action="UserInfo" class="nav-link text-muted">
+                                <i class="bi bi-person-circle"></i>
+                                <span>اطلاعات کاربری</span>
+                            </a>
+                        </li>
+                        @* @if (userinfo.IsSeller == false)
+                        {
+                            <li class="nav-item">
+                                <a asp-controller="UserPanel" asp-action="RequestForSalePanel" class="nav-link text-muted">
+                                    <i class="bi bi-person-circle"></i>
+                                    <span>درخواست پنل فروشندگی</span>
+                                </a>
+                            </li>
+                        } *@
+
+
+
+                        @*      <li class="nav-item">
+                        <a href="order.html" class="nav-link text-muted">
+                        <i class="bi bi-basket-fill"></i>
+                        <span>سفارش ها</span>
+                        </a>
+                        </li>*@
+
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+
+
+        @* @if (userinfo.IsSeller == true)
+        {
+            <div class="ui-box">
+                <div class="ui-box-item">
+                    <div class="ui-box-item-title" style="padding: 15px;">
+                        <h4 class="fw-bold">
+                            پنل فروشندگی
+                        </h4>
+                    </div>
+                    <div class="ui-box-item-desc p-0">
+                        <ul class="nav flex-column sidebar-menu">
+                            <li class="nav-item">
+                                <a asp-controller="UserPanel" asp-action="ProductList" class="nav-link text-muted">
+                                    <i class="bi bi-person-circle"></i>
+                                    <span>مدیریت محصولات</span>
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        } *@
+
+
+
+    </div>
+</div>

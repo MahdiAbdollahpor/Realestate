@@ -1,0 +1,82 @@
+﻿@using ServiceLayer.ViewModels.IdentityViewModels
+@model UserInfoForUserPanelViewModel
+@{
+    ViewData["Title"] = "Dashboard";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content">
+    <div class="dashboard">
+        <div class="container-fluid">
+            <div class="row">
+               @*  <partial name="_UserPanelSidebar" /> *@
+                <div class="col-lg-9">
+                    <div class="content-box" style="padding:40px 20px;">
+                        <div class="row">
+                            <div class="col-12">
+                                <div class="ui-boxs">
+                                    <div class="ui-box">
+                                        <div class="ui-box-item ui-box-white">
+                                            <div class="ui-box-item-title">
+                                                <div class="d-flex justify-content-between align-items-center">
+                                                    <h4 class="fw-bold">
+                                                        اطلاعات شخصی
+                                                    </h4>
+                                                    <button onclick="UpdateUserInfo(@Model.UserId)" class="btn-main btn-main-primary waves-effect waves-light">
+                                                        ویرایش <i class="bi bi-pencil-fill"></i>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="ui-box-item-desc p-0">
+                                                <table class="table main-table shadow-none main-table-2">
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <h6 class="text-muted">نام و نام خانوادگی</h6>
+                                                            <p class="fw-bold mt-2">@Model.DispalyName</p>
+                                                        </td>
+                                                        <td colspan="2">
+                                                            <h6 class="text-muted">شماره تلفن</h6>
+                                                            <p class="fw-bold mt-2">@Model.PhoneNumber</p>
+                                                        </td>
+                                                    </tr>
+                                                    @*                     <tr>
+                                                    <td colspan="2">
+                                                    <h6>پست الکترونیک</h6>
+                                                    <p class="fw-bold mt-2">Amir@gmail.com</p>
+                                                    </td>
+                                                    <td colspan="2">
+                                                    <h6>کد ملی</h6>
+                                                    <p class="fw-bold mt-2">61400011133322</p>
+                                                    </td>
+                                                    </tr>*@
+                                                    <tr>
+                                                        <td colspan="2">
+                                                            <h6>عضویت</h6>
+                                                            <p class="fw-bold mt-2">@Model.RegisterTime </p>
+                                                        </td>
+                                                        @*               <td colspan="2">
+                                                        <h6>کد پستی </h6>
+                                                        <p class="fw-bold mt-2">_</p>
+                                                        </td>*@
+                                                    </tr>
+                                                    @*                  <tr>
+                                                    <td colspan="4">
+                                                    <h6>آدرس: </h6>
+                                                    <p class="fw-bold mt-2">خرم آباد شهریار انتهای کوچه</p>
+                                                    </td>
+                                                    </tr>*@
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end dashboard -->
+</div>
+
