@@ -32,7 +32,7 @@ namespace ServiceLayer.Services
                 {
                     ConfrimCode = GenerateVerifyCode(),
                     ConfrimCodeCreateDate = DateTime.Now,
-                    ConfrimPhoneNumber = false,
+                    ConfrimPhoneNumber = true,
                     DisplayName = model.DisplayName,
                     IsDeleted = false,
                     Password = PasswordHelper.EncodePasswordMd5(model.Password),
@@ -51,28 +51,28 @@ namespace ServiceLayer.Services
             {
                 return -100;
             }
-            if (StatusPhoneNumber == -50)
-            {
+            //if (StatusPhoneNumber == -50)
+            //{
 
-                var user = _db.Users.FirstOrDefault(x => x.PhoneNumber == model.PhoneNumber);
-                if (user.ConfrimCodeCreateDate.AddSeconds(20) > DateTime.Now)
-                {
-                    return -50;
-                }
-                user.DisplayName = model.DisplayName;
-                user.ConfrimCode = GenerateVerifyCode();
-                user.ConfrimCodeCreateDate = DateTime.Now;
-                user.Password = PasswordHelper.EncodePasswordMd5(model.Password);
+            //    var user = _db.Users.FirstOrDefault(x => x.PhoneNumber == model.PhoneNumber);
+            //    if (user.ConfrimCodeCreateDate.AddSeconds(20) > DateTime.Now)
+            //    {
+            //        return -50;
+            //    }
+            //    user.DisplayName = model.DisplayName;
+            //    user.ConfrimCode = GenerateVerifyCode();
+            //    user.ConfrimCodeCreateDate = DateTime.Now;
+            //    user.Password = PasswordHelper.EncodePasswordMd5(model.Password);
                
 
-                //todo => send sms
+            //    //todo => send sms
 
-               // _smsSender.SendSms(1, user.PhoneNumber, user.DisplayName, user.ConfrimCode);
+            //   // _smsSender.SendSms(1, user.PhoneNumber, user.DisplayName, user.ConfrimCode);
 
-                _db.Update(user);
-                _db.SaveChanges();
-                return 1;
-            }
+            //    _db.Update(user);
+            //    _db.SaveChanges();
+            //    return 1;
+            //}
 
             return -1;
         }
@@ -173,10 +173,10 @@ namespace ServiceLayer.Services
             {
                 return -50;
             }
-            if(res.ConfrimPhoneNumber == false)
-            {
-                return -150;
-            }
+            //if(res.ConfrimPhoneNumber == false)
+            //{
+            //    return -150;
+            //}
             if(res.IsDeleted == true)
             {
                 return -200;
@@ -216,8 +216,8 @@ namespace ServiceLayer.Services
                 if (res == true)
                 {
                     _db.Users.Update(user);
-                _db.SaveChanges();
-                return 1;
+                    _db.SaveChanges();
+                    return 1;
                 }
             }
             return -1;

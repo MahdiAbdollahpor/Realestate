@@ -175,7 +175,74 @@
     </div>
 </section>
 
-<div class="popup" id="sign-popup">
+@* <!-- Forgot Password Modal -->
+<div class="popup" id="forgot-password-popup">
+    <h3>Forgot Password?</h3>
+    <div class="popup-form">
+        <form>
+            <div class="form-field">
+                <input type="text" name="phone" placeholder="Phone Number">
+            </div>
+            <button type="submit" class="btn2" id="send-code">Submit</button>
+        </form>
+    </div>
+</div><!--popup end-->
+ *@
+
+<div class="popup" id="forgot-password-popup">
+    <h3>Forgot Password?</h3>
+    <div class="popup-form">
+        <form id="forgot-password-form">
+            <div class="form-field">
+                <input type="text" id="forgotPhoneNumber" name="forgotPhoneNumber" placeholder="شماره همراه">
+            </div>
+            <button type="submit" class="btn2">Submit</button>
+        </form>
+    </div>
+</div>
+
+@* <!-- Reset Password Modal -->
+<div class="popup" id="reset-password-popup">
+    <h3>Reset Password</h3>
+    <div class="popup-form">
+        <form>
+            <div class="form-field">
+                <input type="text" name="verification-code" placeholder="Verification Code">
+            </div>
+            <div class="form-field">
+                <input type="password" name="new-password" placeholder="New Password">
+            </div>
+            <div class="form-field">
+                <input type="password" name="confirm-password" placeholder="Confirm Password">
+            </div>
+            <button type="submit" class="btn2" id="reset-password">Reset Password</button>
+        </form>
+    </div>
+</div><!--popup end--> *@
+
+<div class="popup" id="reset-password-popup">
+    <h3>Reset Password</h3>
+    <div class="popup-form">
+        <form id="reset-password-form">
+            <div class="form-field">
+                <input type="text" id="resetCode" name="resetCode" placeholder="کد تایید">
+            </div>
+            <div class="form-field">
+                <input type="text" id="resetPhoneNumber" name="resetPhoneNumber" placeholder="شماره همراه">
+            </div>
+            <div class="form-field">
+                <input type="password" id="resetPassword" name="resetPassword" placeholder="رمز عبور">
+            </div>
+            <div class="form-field">
+                <input type="password" id="resetRePassword" name="resetRePassword" placeholder="تکرار رمز عبور">
+            </div>
+            <button type="submit" class="btn2">Reset Password</button>
+        </form>
+    </div>
+</div>
+
+
+@* <div class="popup" id="sign-popup">
     <h3>Sign In to your Account</h3>
     <div class="popup-form">
         <form>
@@ -195,26 +262,58 @@
                         </label>
                     </div>
                 </div>
-                <a href="#" title="">Forgot Password?</a>
+                <a  href="#" title="" class="forgotpassword-op">فراموشی رمز عبور</a>
             </div><!--form-cp end-->
             <button type="submit" class="btn2">Sign In</button>
         </form>
         <a href="#" title="" class="fb-btn"> <i class="fa fa-facebook"></i>Sign In With Facebook</a>
     </div>
-</div><!--popup end-->
+</div><!--popup end-->  *@
 
-<div class="popup" id="register-popup">
+<div class="popup" id="sign-popup">
+    <h3>Sign In to your Account</h3>
+    <div class="popup-form">
+        <form id="login-form">
+            <div class="form-field">
+                <input type="text" id="loginPhoneNumber" name="PhoneNumber" placeholder="شماره همراه">
+            </div>
+            <div class="form-field">
+                <input type="password" id="loginPassword" name="Password" placeholder="رمز عبور">
+            </div>
+            <div class="form-cp">
+                <div class="form-field">
+                    <div class="input-field">
+                        <input type="checkbox" id="rememberMe" name="RememberMe">
+                        <label for="rememberMe">
+                            <span></span>
+                            <small>مرا به خاطر بسپار</small>
+                        </label>
+                    </div>
+                </div>
+                <a href="#" title="" class="forgotpassword-op">فراموشی رمز عبور</a>
+            </div>
+            <button type="submit" class="btn2">ورود</button>
+        </form>
+    </div>
+</div>
+
+
+
+@*  <div class="popup" id="register-popup">
     <h3>Register</h3>
     <div class="popup-form">
         <form>
             <div class="form-field">
-                <input type="text" name="username" placeholder="Username">
+                <input type="text" name="DisplayName" placeholder="DisplayName">
             </div>
             <div class="form-field">
-                <input type="text" name="email" placeholder="Email">
+                <input type="text" name="PhoneNumber" placeholder="PhoneNumber">
             </div>
             <div class="form-field">
                 <input type="text" name="password" placeholder="Password">
+            </div>
+            <div class="form-field">
+                <input type="text" name="RePassword" placeholder="RePassword">
             </div>
             <div class="form-cp">
                 <div class="form-field">
@@ -231,7 +330,33 @@
             <button type="submit" class="btn2">Register</button>
         </form>
     </div>
-</div><!--popup end-->
+</div><!--popup end--> *@
+
+
+<div class="popup" id="register-popup">
+    <h3>Register</h3>
+    <div class="popup-form">
+        <form id="register-form">
+            <div class="form-field">
+                <input type="text" id="registerPhoneNumber" name="registerPhoneNumber" placeholder="شماره همراه">
+            </div>
+            <div class="form-field">
+                <input type="text" id="registerDisplayName" name="registerDisplayName" placeholder="نام و نام خانوادگی">
+            </div>
+            <div class="form-field">
+                <input type="password" id="registerPassword" name="registerPassword" placeholder="رمز عبور">
+            </div>
+            <div class="form-field">
+                <input type="password" id="registerRePassword" name="registerRePassword" placeholder="تکرار رمز عبور">
+            </div>
+            <button type="submit" class="btn2">Register</button>
+        </form>
+    </div>
+</div>
+
+
+
+
 
 <section class="categories-sec section-padding">
     <div class="container">
@@ -690,5 +815,6 @@
     </div>
 </section>
 
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="/assets/js/jquery-3.3.1.min.js"></script>
 <script src="/assets/js/scripts.js"></script>

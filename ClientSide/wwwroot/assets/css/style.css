@@ -4449,11 +4449,13 @@ header.fix {
   z-index: -1;
 }
 #sign-popup.active.popup,
-#register-popup.active.popup {
-  opacity: 1;
-  z-index: 99999;
-  visibility: visible;
-  margin: 0;
+#register-popup.active.popup,
+#forgot-password-popup.active.popup,
+#reset-password-popup.active.popup {
+    opacity: 1;
+    z-index: 99999;
+    visibility: visible;
+    margin: 0;
 } 
 .popup > h3 {
   color: #242526;

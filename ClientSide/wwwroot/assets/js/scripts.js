@@ -1,4 +1,4 @@
-$(window).on("load", function() {
+﻿$(window).on("load", function() {
     "use strict";
 
 
@@ -63,7 +63,45 @@ $(window).on("load", function() {
         e.stopPropagation();
     });
 
+    //Open Forgot Password Modal
+    $(".forgotpassword-op").on("click", function () {
+        $("#forgot-password-popup").toggleClass("active");
+        $("#sign-popup").removeClass("active");
+        $(".wrapper").addClass("overlay-bgg");
 
+    });
+
+    // Close Popups on Clicking Outside
+    $("html").on("click", function () {
+        $(".popup").removeClass("active");
+        $(".wrapper").removeClass("overlay-bgg");
+    });
+    $(".forgotpassword-op,.popup").on("click", function (e) {
+        e.stopPropagation();
+    });
+
+    // Open Reset Password Modal after entering phone number
+    $("#send-code").on("click", function () {
+        $("#forgot-password-popup").removeClass("active");
+        $("#reset-password-popup").toggleClass("active");
+    });
+
+    // Handle Reset Password
+    $("#reset-password").on("click", function () {
+        var verificationCode = $("input[name='verification-code']").val();
+        var newPassword = $("input[name='new-password']").val();
+        var confirmPassword = $("input[name='confirm-password']").val();
+
+        if (newPassword === confirmPassword) {
+            // Perform password reset action here (e.g., send to server)
+            alert("Password has been reset successfully.");
+            $("#reset-password-popup").removeClass("active");
+            $(".wrapper").removeClass("overlay-bgg");
+        } else {
+            alert("Passwords do not match.");
+        }
+    });
+    
 
     /*==============================================
                 FEATURES TOGGLE FUNCTION
@@ -178,8 +216,129 @@ $(window).on("load", function() {
     });
     
 
+    /*==============================================
+                      Send FUNCTIONS
+    ===============================================*/
+   
+        $(document).ready(function () {
+            $("#login-form").on("submit", function (e) {
+                e.preventDefault(); // جلوگیری از ارسال سنتی فرم
 
-    
+                var formData = {
+                    PhoneNumber: $("#loginPhoneNumber").val(),
+                    Password: $("#loginPassword").val(),
+                    RememberMe: $("#rememberMe").is(":checked")
+                    //PhoneNumber: document.querySelector("#loginPhoneNumber").value,
+                    //Password: document.querySelector("#loginPassword").value,
+                    //RememberMe: document.querySelector("#rememberMe").checked
+                };
+                console.log(formData);
+                $.ajax({
+                    type: "POST",
+                    url: "/Identity/LoginByMobile", // آدرس اکشن
+                    data: formData,
+                    success: function (response) {
+                        if (response.success) {
+                            /*window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی*/
+                            window.location.reload()
+                        } else {
+                            alert(response.message); // نمایش پیام خطا
+                        }
+                    },
+                    error: function () {
+                        alert("خطایی در ارتباط با سرور رخ داده است.");
+                    }
+                });
+            });
+        });
+  
+
+    $(document).ready(function () {
+        $("#register-form").on("submit", function (e) {
+            e.preventDefault(); // جلوگیری از ارسال سنتی فرم
+
+            var formData = {
+                PhoneNumber: $("#registerPhoneNumber").val(),
+                DisplayName: $("#registerDisplayName").val(),
+                Password: $("#registerPassword").val(),
+                RePassword: $("#registerRePassword").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Identity/RegisterByMobile", // آدرس اکشن
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
+                    } else {
+                        alert(response.message); // نمایش پیام خطا
+                    }
+                },
+                error: function () {
+                    alert("خطایی در ارتباط با سرور رخ داده است.");
+                }
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+        $("#forgot-password-form").on("submit", function (e) {
+            e.preventDefault(); // جلوگیری از ارسال سنتی فرم
+
+            var formData = {
+                PhoneNumber: $("#forgotPhoneNumber").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Identity/ForgotPassword", // آدرس اکشن
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
+                    } else {
+                        alert(response.message); // نمایش پیام خطا
+                    }
+                },
+                error: function () {
+                    alert("خطایی در ارتباط با سرور رخ داده است.");
+                }
+            });
+        });
+    });
+
+
+
+    $(document).ready(function () {
+        $("#reset-password-form").on("submit", function (e) {
+            e.preventDefault(); // جلوگیری از ارسال سنتی فرم
+
+            var formData = {
+                Code: $("#resetCode").val(),
+                PhoneNumber: $("#resetPhoneNumber").val(),
+                Password: $("#resetPassword").val(),
+                RePassword: $("#resetRePassword").val()
+            };
+
+            $.ajax({
+                type: "POST",
+                url: "/Identity/RsetPassword", // آدرس اکشن
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
+                    } else {
+                        alert(response.message); // نمایش پیام خطا
+                    }
+                },
+                error: function () {
+                    alert("خطایی در ارتباط با سرور رخ داده است.");
+                }
+            });
+        });
+    });
 
 
 
