@@ -210,15 +210,15 @@ namespace ServiceLayer.Services
                 user.ConfrimCode = GenerateVerifyCode();
                 user.ConfrimCodeCreateDate = DateTime.Now;
 
-                bool res = _smsSender.SendSms(2, user.PhoneNumber, user.DisplayName, user.ConfrimCode);
+                //bool res = _smsSender.SendSms(2, user.PhoneNumber, user.DisplayName, user.ConfrimCode);
 
 
-                if (res == true)
-                {
+                //if (res == true)
+                //{
                     _db.Users.Update(user);
                     _db.SaveChanges();
                     return 1;
-                }
+                //}
             }
             return -1;
 

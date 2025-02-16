@@ -228,9 +228,7 @@
                     PhoneNumber: $("#loginPhoneNumber").val(),
                     Password: $("#loginPassword").val(),
                     RememberMe: $("#rememberMe").is(":checked")
-                    //PhoneNumber: document.querySelector("#loginPhoneNumber").value,
-                    //Password: document.querySelector("#loginPassword").value,
-                    //RememberMe: document.querySelector("#rememberMe").checked
+                    
                 };
                 console.log(formData);
                 $.ajax({
@@ -239,8 +237,8 @@
                     data: formData,
                     success: function (response) {
                         if (response.success) {
-                            /*window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی*/
-                            window.location.reload()
+                            window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
+                            
                         } else {
                             alert(response.message); // نمایش پیام خطا
                         }
@@ -283,6 +281,32 @@
     });
 
 
+    //$(document).ready(function () {
+    //    $("#forgot-password-form").on("submit", function (e) {
+    //        e.preventDefault(); // جلوگیری از ارسال سنتی فرم
+
+    //        var formData = {
+    //            PhoneNumber: $("#forgotPhoneNumber").val()
+    //        };
+
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "/Identity/ForgotPassword", // آدرس اکشن
+    //            data: formData,
+    //            success: function (response) {
+    //                if (response.success) {
+    //                    window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
+    //                } else {
+    //                    alert(response.message); // نمایش پیام خطا
+    //                }
+    //            },
+    //            error: function () {
+    //                alert("خطایی در ارتباط با سرور رخ داده است.");
+    //            }
+    //        });
+    //    });
+    //});
+
     $(document).ready(function () {
         $("#forgot-password-form").on("submit", function (e) {
             e.preventDefault(); // جلوگیری از ارسال سنتی فرم
@@ -297,7 +321,9 @@
                 data: formData,
                 success: function (response) {
                     if (response.success) {
-                        window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
+                        $("#forgot-password-popup").removeClass("active");
+                        $("#reset-password-popup").toggleClass("active");
+                        $("#resetPhoneNumber").val(response.phoneNumber); // تنظیم شماره تلفن در مودال reset-password-popup
                     } else {
                         alert(response.message); // نمایش پیام خطا
                     }
@@ -310,6 +336,35 @@
     });
 
 
+
+    //$(document).ready(function () {
+    //    $("#reset-password-form").on("submit", function (e) {
+    //        e.preventDefault(); // جلوگیری از ارسال سنتی فرم
+
+    //        var formData = {
+    //            Code: $("#resetCode").val(),
+    //            PhoneNumber: $("#resetPhoneNumber").val(),
+    //            Password: $("#resetPassword").val(),
+    //            RePassword: $("#resetRePassword").val()
+    //        };
+
+    //        $.ajax({
+    //            type: "POST",
+    //            url: "/Identity/RsetPassword", // آدرس اکشن
+    //            data: formData,
+    //            success: function (response) {
+    //                if (response.success) {
+    //                    window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
+    //                } else {
+    //                    alert(response.message); // نمایش پیام خطا
+    //                }
+    //            },
+    //            error: function () {
+    //                alert("خطایی در ارتباط با سرور رخ داده است.");
+    //            }
+    //        });
+    //    });
+    //});
 
     $(document).ready(function () {
         $("#reset-password-form").on("submit", function (e) {
@@ -328,7 +383,8 @@
                 data: formData,
                 success: function (response) {
                     if (response.success) {
-                        window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
+                        $("#reset-password-popup").removeClass("active");
+                        $("#sign-popup").toggleClass("active");
                     } else {
                         alert(response.message); // نمایش پیام خطا
                     }

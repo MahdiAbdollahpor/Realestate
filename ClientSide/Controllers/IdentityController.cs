@@ -21,16 +21,6 @@ namespace ClientSide.Controllers
             return View();
         }
 
-        //[HttpGet]
-        //[Route("Register")]
-        //public IActionResult RegisterByMobile()
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    return View();
-        //}
 
         [HttpPost]
         //[Route("Register")]
@@ -41,8 +31,7 @@ namespace ClientSide.Controllers
                 int res = _identityService.RegisterByPhoneNumber(model);
                 if (res == 1)
                 {
-                    //TempData["success"] = "ثبت نام با موفقیت انجام شد";
-                    //return RedirectToAction("ConfrimMobile", new { id = model.PhoneNumber });
+                    
 
                     int userId = _identityService.GetUserIdByPhoneNumber(model.PhoneNumber);
                     var claims = new List<Claim>()
@@ -60,101 +49,23 @@ namespace ClientSide.Controllers
                     };
                     HttpContext.SignInAsync(principal, properties);
 
-                    TempData["success"] = "حساب کاربری شما با موفقیت تایید شد";
-                    return RedirectToAction("Index", "Home");
+                    TempData["success"] = "ورود با موفقیت انجام شد";
+                    return Json(new { success = true, redirectUrl = Url.Action("Index", "Home") });
 
                 }
                 if (res == -100)
                 {
-                    TempData["error"] = "این شماره موبایل قبلا در سایت ثبت نام کرده است";
-                    return View(model);
+                    return Json(new { success = false, message = "این شماره موبایل قبلا در سایت ثبت نام کرده است" });
                 }
-                //if (res == -50)
-                //{
-                //    TempData["warning"] = "بعد 3 دقیقه دوباره تلاش کنید ";
-                //    return View(model);
-                //}
+                
             }
-            TempData["error"] = "کاربر گرامی متاسفانه ثبت نام موفقیت آمیز نبود  ";
-            return RedirectToAction("Index", "Home");
+            return Json(new { success = false, message = "کاربر گرامی متاسفانه ثبت نام موفقیت آمیز نبود  " });
         }
 
-        //[HttpGet]
-        //[Route("ConfrimMobile/{id}")]
-        //public IActionResult ConfrimMobile(string id)
-        //{
-        //    bool isMobileExist = _identityService.IsPhoneNumberExist(id);
-        //    if (isMobileExist == false)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-        //    ViewBag.PhoneNumber = id;
-        //    return View();
-        //}
-
-        //[HttpPost]
-        //[Route("ConfrimMobile/{id}")]
-        //public IActionResult ConfrimMobile(ConfrimPhoneViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        int res = _identityService.ConfrimPhoneNumber(model.PhoneNumber, model.code);
-        //        if (res == 1)
-        //        {
+        
 
 
-        //            int userId = _identityService.GetUserIdByPhoneNumber(model.PhoneNumber);
-        //            var claims = new List<Claim>()
-        //            {
-        //                new Claim(ClaimTypes.NameIdentifier,userId.ToString()),
-        //                new Claim(ClaimTypes.Name,model.PhoneNumber)
-        //            };
-        //            var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-        //            var principal = new ClaimsPrincipal(identity);
-
-        //            var properties = new AuthenticationProperties
-        //            {
-        //                IsPersistent = true,
-        //                AllowRefresh = true
-        //            };
-        //            HttpContext.SignInAsync(principal, properties);
-
-        //            TempData["success"] = "حساب کاربری شما با موفقیت تایید شد";
-        //            return RedirectToAction("Index", "Home");
-        //        }
-        //        if (res == -100)
-        //        {
-        //            TempData["error"] = "کاربر یافت نشد";
-        //            return View();
-        //        }
-        //        if (res == -50)
-        //        {
-        //            TempData["warning"] = " کد تایید منقضی شده ";
-        //            return View(model);
-        //        }
-        //        if (res == -200)
-        //        {
-        //            TempData["warning"] = " کد تایید تطابق ندارد ";
-        //            return View();
-        //        }
-        //    }
-        //    TempData["error"] = " خطا در تایید کد ";
-        //    return View(model);
-        //}
-
-
-        [HttpGet]
-        [Route("Login")]
-        public IActionResult LoginByMobile()
-        {
-
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View();
-        }
+        
 
         [HttpPost]
         //[Route("Login")]
@@ -165,23 +76,19 @@ namespace ClientSide.Controllers
                 int res = _identityService.GetUserStatusForLoginByPhoneNumber(model.PhoneNumber, model.Password);
                 if (res == -100)
                 {
-                    TempData["error"] = "حساب کاربری وجود ندارد";
-                    return View();
+                    
+                    return Json(new { success = false, message = "حساب کاربری وجود ندارد" });
                 }
                 if (res == -50)
                 {
-                    TempData["error"] = "کاربر گرامی رمز عبور شما اشتباه است";
-                    return View(model);
+                    
+                    return Json(new { success = false, message = "کاربر گرامی رمز عبور شما اشتباه است" });
                 }
-                //if (res == -150)
-                //{
-                //    TempData["warning"] = "  حساب کاربری شما فعال نیست لطفا مجدد ثبت نام کنید";
-                //    return View();
-                //}
+                
                 if (res == -200)
                 {
-                    TempData["error"] = "حساب کاربری شما حذف شده است";
-                    return View();
+                   
+                    return Json(new { success = false, message = "حساب کاربری شما حذف شده است" });
                 }
                 else
                 {
@@ -201,34 +108,20 @@ namespace ClientSide.Controllers
                     };
                     HttpContext.SignInAsync(principal, properties);
 
-                    //if (returnUrl  != null)
-                    //{
-                    //    TempData["success"] = "ورود با موفقیت انجام شد";
-                    //    return RedirectToAction("returnUrl");
-                    //}
+                    
 
                     TempData["success"] = "ورود با موفقیت انجام شد";
-                    return RedirectToAction("Index", "Home");
+                    return Json(new { success = true, redirectUrl = Url.Action("Index", "Home") });
                 }
             }
-            TempData["error"] = "کاربر گرامی متاسفانه ورود به حساب کاربری موفقیت آمیز نبود  ";
-            return View(model);
+            
+            return Json(new { success = false, message = "کاربر گرامی متاسفانه ورود به حساب کاربری موفقیت آمیز نبود" });
         }
 
-        [HttpGet]
-        [Route("ForgotPassword")]
-        public IActionResult ForgotPassword()
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
-
-            return View();
-        }
+        
 
         [HttpPost]
-        [Route("ForgotPassword")]
+        //[Route("ForgotPassword")]
         public IActionResult ForgotPassword(ForgotPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -236,48 +129,79 @@ namespace ClientSide.Controllers
                 int res = _identityService.GetPhoneNumberStatusForForgotPass(model.PhoneNumber);
                 if (res == -100)
                 {
-                    TempData["error"] = "حساب کاربری یافت نشد";
-                    return View();
+                    return Json(new { success = false, message = "حساب کاربری یافت نشد" });
                 }
                 if (res == -50)
                 {
-                    TempData["error"] = "کاربر گرامی حساب شما مسدود است";
-                    return View(model);
+                    return Json(new { success = false, message = "کاربر گرامی حساب شما مسدود است" });
                 }
                 if (res == -200)
                 {
-                    TempData["error"] = "حساب کاربری فعال نیست لطفا مجدد ثبت نام کنید";
-                    return View();
+                    return Json(new { success = false, message = "حساب کاربری فعال نیست لطفا مجدد ثبت نام کنید" });
                 }
                 if (res == 1)
                 {
-                    TempData["success"] = "کد تایید برای شما ارسال شد";
-                    return RedirectToAction("RsetPassword", new { id = model.PhoneNumber });
+                    //TempData["success"] = "کد تایید برای شما ارسال شد";
+                    //return RedirectToAction("RsetPassword", new { id = model.PhoneNumber });
+                    return Json(new { success = true, phoneNumber = model.PhoneNumber });
                 }
 
 
             }
-            TempData["error"] = "کاربر عزیز متاسفانه عملیات موفقیت آمیز نبود";
-            return View(model);
+            return Json(new { success = false, message = "کاربر عزیز متاسفانه عملیات موفقیت آمیز نبود" });
         }
 
-        [HttpGet]
-        [Route("ResetPassword")]
-        public IActionResult RsetPassword(string id)
-        {
-            if (User.Identity.IsAuthenticated)
-            {
-                return RedirectToAction("Index", "Home");
-            }
+        //[HttpGet]
+        //[Route("ResetPassword")]
+        //public IActionResult RsetPassword(string id)
+        //{
+        //    if (User.Identity.IsAuthenticated)
+        //    {
+        //        return RedirectToAction("Index", "Home");
+        //    }
 
-            ViewBag.phoneNumber = id;
+        //    ViewBag.phoneNumber = id;
 
-            return View();
-        }
+        //    return View();
+        //}
+
+
+        //[HttpPost]
+        ////[Route("ResetPassword")]
+        //public IActionResult RsetPassword(RsetPasswordViewModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        int res = _identityService.ResetPasswordByMobile(model);
+        //        if (res == -100)
+        //        {
+        //            TempData["error"] = "حساب کاربری یافت نشد";
+        //            return View();
+        //        }
+        //        if (res == -50)
+        //        {
+        //            TempData["error"] = "کد تایید منقضی شده است";
+        //            return View(model);
+        //        }
+        //        if (res == -200)
+        //        {
+        //            TempData["error"] = "کد تایید تطابق ندارد";
+        //            return View(model);
+        //        }
+        //        if (res == 1)
+        //        {
+        //            TempData["success"] = "رمز عبور شما با موفقیت تغییر یافت";
+        //            return RedirectToAction("LoginByMobile");
+        //        }
+
+
+        //    }
+        //    TempData["error"] = "کاربر عزیز متاسفانه عملیات موفقیت آمیز نبود";
+        //    return View(model);
+        //}
 
 
         [HttpPost]
-        [Route("ResetPassword")]
         public IActionResult RsetPassword(RsetPasswordViewModel model)
         {
             if (ModelState.IsValid)
@@ -285,29 +209,23 @@ namespace ClientSide.Controllers
                 int res = _identityService.ResetPasswordByMobile(model);
                 if (res == -100)
                 {
-                    TempData["error"] = "حساب کاربری یافت نشد";
-                    return View();
+                    return Json(new { success = false, message = "حساب کاربری یافت نشد" });
                 }
                 if (res == -50)
                 {
-                    TempData["error"] = "کد تایید منقضی شده است";
-                    return View(model);
+                    return Json(new { success = false, message = "کد تایید منقضی شده است" });
                 }
                 if (res == -200)
                 {
-                    TempData["error"] = "کد تایید تطابق ندارد";
-                    return View(model);
+                    return Json(new { success = false, message = "کد تایید تطابق ندارد" });
                 }
                 if (res == 1)
                 {
                     TempData["success"] = "رمز عبور شما با موفقیت تغییر یافت";
-                    return RedirectToAction("LoginByMobile");
+                    return Json(new { success = true, redirectUrl = Url.Action("LoginByMobile") });
                 }
-
-
             }
-            TempData["error"] = "کاربر عزیز متاسفانه عملیات موفقیت آمیز نبود";
-            return View(model);
+            return Json(new { success = false, message = "کاربر عزیز متاسفانه عملیات موفقیت آمیز نبود" });
         }
 
         [Route("SignOut")]
