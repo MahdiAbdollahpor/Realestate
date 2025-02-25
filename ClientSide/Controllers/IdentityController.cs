@@ -151,54 +151,7 @@ namespace ClientSide.Controllers
             return Json(new { success = false, message = "کاربر عزیز متاسفانه عملیات موفقیت آمیز نبود" });
         }
 
-        //[HttpGet]
-        //[Route("ResetPassword")]
-        //public IActionResult RsetPassword(string id)
-        //{
-        //    if (User.Identity.IsAuthenticated)
-        //    {
-        //        return RedirectToAction("Index", "Home");
-        //    }
-
-        //    ViewBag.phoneNumber = id;
-
-        //    return View();
-        //}
-
-
-        //[HttpPost]
-        ////[Route("ResetPassword")]
-        //public IActionResult RsetPassword(RsetPasswordViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        int res = _identityService.ResetPasswordByMobile(model);
-        //        if (res == -100)
-        //        {
-        //            TempData["error"] = "حساب کاربری یافت نشد";
-        //            return View();
-        //        }
-        //        if (res == -50)
-        //        {
-        //            TempData["error"] = "کد تایید منقضی شده است";
-        //            return View(model);
-        //        }
-        //        if (res == -200)
-        //        {
-        //            TempData["error"] = "کد تایید تطابق ندارد";
-        //            return View(model);
-        //        }
-        //        if (res == 1)
-        //        {
-        //            TempData["success"] = "رمز عبور شما با موفقیت تغییر یافت";
-        //            return RedirectToAction("LoginByMobile");
-        //        }
-
-
-        //    }
-        //    TempData["error"] = "کاربر عزیز متاسفانه عملیات موفقیت آمیز نبود";
-        //    return View(model);
-        //}
+        
 
 
         [HttpPost]

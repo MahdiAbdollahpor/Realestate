@@ -4,16 +4,16 @@
 @{
     var userinfo = _identityService.GetDisplayNameByPhoneNumber(User.Identity.Name);
 }
-<div class="col-lg-3">
+<div class="col-lg-3 mt-5">
     <div class="ui-boxs">
         <div class="ui-box">
             <div class="ui-box-item">
                 <div class="ui-box-item-desc" style="border-radius: 10px;background-color: #fff;">
                     <div class="dashboard-user-img-profile">
-                        <img src="/appdata/user/avatar/" width="80" height="80" class="img-fluid rounded-circle" alt="@userinfo">
+                        @* <img src="/appdata/user/avatar/@userinfo.AvatarName" width="80" height="80" class="img-fluid rounded-circle" alt="@userinfo.DisplayName"> *@
                     </div>
                     <div class="dashboard-user-info">
-                        <h6 class="user-name">@userinfo</h6>
+                        <h6 class="user-name">DisplayName</h6>
                         @* <h6 class="text-muted user-number">09338492205</h6>*@
                     </div>
                     <div class="dashboard-user-btn">
@@ -76,7 +76,7 @@
         </div>
 
 
-        @* @if (userinfo.IsSeller == true)
+       @*  @if (userinfo.IsSeller == true)
         {
             <div class="ui-box">
                 <div class="ui-box-item">
@@ -105,3 +105,5 @@
 
     </div>
 </div>
+
+ 

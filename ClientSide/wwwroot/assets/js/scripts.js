@@ -101,6 +101,20 @@
             alert("Passwords do not match.");
         }
     });
+
+    // edit user info
+    $("#edit-op").on("click", function () {
+        $("#editUserInfo-popup").toggleClass("active");
+        $(".wrapper").addClass("overlay-bgg");
+    });
+    $("html").on("click", function () {
+        $("#editUserInfo-popup").removeClass("active");
+        $(".wrapper").removeClass("overlay-bgg");
+    });
+    $("#edit-op, .popup").on("click", function (e) {
+        e.stopPropagation();
+    });
+
     
 
     /*==============================================
@@ -281,31 +295,7 @@
     });
 
 
-    //$(document).ready(function () {
-    //    $("#forgot-password-form").on("submit", function (e) {
-    //        e.preventDefault(); // جلوگیری از ارسال سنتی فرم
-
-    //        var formData = {
-    //            PhoneNumber: $("#forgotPhoneNumber").val()
-    //        };
-
-    //        $.ajax({
-    //            type: "POST",
-    //            url: "/Identity/ForgotPassword", // آدرس اکشن
-    //            data: formData,
-    //            success: function (response) {
-    //                if (response.success) {
-    //                    window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
-    //                } else {
-    //                    alert(response.message); // نمایش پیام خطا
-    //                }
-    //            },
-    //            error: function () {
-    //                alert("خطایی در ارتباط با سرور رخ داده است.");
-    //            }
-    //        });
-    //    });
-    //});
+    
 
     $(document).ready(function () {
         $("#forgot-password-form").on("submit", function (e) {
@@ -337,34 +327,7 @@
 
 
 
-    //$(document).ready(function () {
-    //    $("#reset-password-form").on("submit", function (e) {
-    //        e.preventDefault(); // جلوگیری از ارسال سنتی فرم
-
-    //        var formData = {
-    //            Code: $("#resetCode").val(),
-    //            PhoneNumber: $("#resetPhoneNumber").val(),
-    //            Password: $("#resetPassword").val(),
-    //            RePassword: $("#resetRePassword").val()
-    //        };
-
-    //        $.ajax({
-    //            type: "POST",
-    //            url: "/Identity/RsetPassword", // آدرس اکشن
-    //            data: formData,
-    //            success: function (response) {
-    //                if (response.success) {
-    //                    window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
-    //                } else {
-    //                    alert(response.message); // نمایش پیام خطا
-    //                }
-    //            },
-    //            error: function () {
-    //                alert("خطایی در ارتباط با سرور رخ داده است.");
-    //            }
-    //        });
-    //    });
-    //});
+    
 
     $(document).ready(function () {
         $("#reset-password-form").on("submit", function (e) {
@@ -396,6 +359,36 @@
         });
     });
 
+    $(document).ready(function () {
+        $("#editUserInfo-form").on("submit", function (e) {
+            e.preventDefault(); // جلوگیری از ارسال سنتی فرم
+           
+            var formData = {
+                UserId: $("#editUserId").val(),
+                DispalyName: $("#editDisplayName").val(),
+                RegisterTime: $("#editRegisterTime").val(),
+                PhoneNumber: $("#editPhoneNumber").val()
+            };
+            
+
+            $.ajax({
+                type: "POST",
+                url: "/UserPanel/UpdateUserInfo", // آدرس اکشن
+                data: formData,
+                success: function (response) {
+                    if (response.success) {
+                        /*location.reload();*/
+                        window.location.href = response.redirectUrl; // هدایت به صفحه‌ی اصلی
+                    } else {
+                        alert(response.message); // نمایش پیام خطا
+                    }
+                },
+                error: function () {
+                    alert("خطایی در ارتباط با سرور رخ داده است.");
+                }
+            });
+        });
+    });
 
 
 });

@@ -300,8 +300,22 @@ namespace ServiceLayer.Services
             }).FirstOrDefault();
         }
 
-        
-
-
+        public bool UpdateUserInfoFromUserPanel(UserInfoForUserPanelViewModel model)
+        {
+            if (model != null)
+            {
+                var temp = _db.Users.FirstOrDefault(x => x.UserId == model.UserId);
+                temp.DisplayName = model.DispalyName;
+                _db.Users.Update(temp);
+                int res = _db.SaveChanges();
+                if (res > 0)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
+
+
+    }
     }
