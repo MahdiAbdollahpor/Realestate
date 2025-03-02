@@ -367,7 +367,7 @@
                 UserId: $("#editUserId").val(),
                 DispalyName: $("#editDisplayName").val(),
                 RegisterTime: $("#editRegisterTime").val(),
-                PhoneNumber: $("#editPhoneNumber").val()
+                PhoneNumber: $("#editPhoneNumber").val()  
             };
             
 

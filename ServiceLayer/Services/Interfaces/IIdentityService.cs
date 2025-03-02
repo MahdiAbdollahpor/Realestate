@@ -20,6 +20,8 @@ namespace ServiceLayer.Services.Interfaces
         string GetDisplayNameByPhoneNumber(string phone);
         bool CheckPermission(int permissionId, string phoneNumber);
         bool UpdateUserInfoFromUserPanel(UserInfoForUserPanelViewModel model);
+        bool AddNewPassword(NewPasswordViewModel model);
+        public UserPanelSidebarViewModels GetUserPanelSidebar(string phoneNumber);
         UserInfoForUserPanelViewModel GetUserInfoForUserPanel(string phoneNumber);
     }
 }

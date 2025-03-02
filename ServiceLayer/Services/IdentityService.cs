@@ -254,6 +254,8 @@ namespace ServiceLayer.Services
             return -1;
         }
 
+        
+
         public string GetDisplayNameByPhoneNumber(string phone)
         {
             return _db.Users.FirstOrDefault(x => x.PhoneNumber == phone).DisplayName;
@@ -316,6 +318,55 @@ namespace ServiceLayer.Services
             return false;
         }
 
+        public UserPanelSidebarViewModels GetUserPanelSidebar(string phoneNumber)
+        {
+            
+
+            //var user = _db.Users.Include(x => x.seller).Where(x => x.PhoneNumber == phoneNumber);
+            //int requestStatus = _storeService.GetSellerStatusByPhoneNumber(phoneNumber);
+            //if (requestStatus == 2)
+            //{
+            //    return user.Select(x => new UserPanelSidebarViewModels
+            //    {
+            //        AvatarName = x.Avatar,
+            //        DisplayName = x.DisplayName,
+            //        IsSeller = true
+            //    }).FirstOrDefault();
+            //}
+            //return user.Select(x => new UserPanelSidebarViewModels
+            //{
+            //    AvatarName = x.Avatar,
+            //    DisplayName = x.DisplayName,
+            //    IsSeller = false
+            //}).FirstOrDefault();
+
+
+            var user = _db.Users.FirstOrDefault(x => x.PhoneNumber == phoneNumber);
+            UserPanelSidebarViewModels userPanelSidebarViewModels = new UserPanelSidebarViewModels
+            {
+                DisplayName = user.DisplayName
+
+            };
+            return userPanelSidebarViewModels;
+
+
+        }
+
+        public bool AddNewPassword(NewPasswordViewModel model)
+        {
+            if (model != null)
+            {
+                var user = _db.Users.FirstOrDefault(x => x.PhoneNumber == model.PhoneNumber);
+                user.ConfrimCode = GenerateVerifyCode();
+                user.ConfrimCodeCreateDate = DateTime.Now;
+                user.Password = PasswordHelper.EncodePasswordMd5(model.Password);
+
+                _db.Users.Update(user);
+                _db.SaveChanges();
+                return true;
+            }
+            return false;
+        }
 
     }
-    }
+}
