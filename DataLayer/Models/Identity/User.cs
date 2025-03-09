@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DataLayer.Models.Store;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -27,7 +28,9 @@ namespace DataLayer.Models.Identity
 
         public IEnumerable<UserRole> UserRoles { get; set; }
 
-        
+        public IEnumerable<Property> Properties { get; set; } // لیست املاک کاربر
+
+
         #endregion
     }
 }

@@ -1,4 +1,5 @@
 ﻿using DataLayer.Models.Identity;
+using DataLayer.Models.Store;
 using Microsoft.EntityFrameworkCore;
 
 namespace DataLayer.Context
@@ -15,6 +16,7 @@ namespace DataLayer.Context
         public DbSet<Permission> Permissions { get; set; }
         public DbSet<UserRole> UserRoles { get; set; }
         public DbSet<RolePermission> RolePermissions { get; set; }
+        public DbSet<Property> Properties { get; set; }
 
     }
 }
