@@ -63,5 +63,10 @@ namespace ClientSide.Controllers
             TempData["error"] = "خطا در تغییر کد ";
             return View(model);
         }
+
+        public IActionResult CreateProperty ()
+        {
+            return View();
+        }
     }
 }

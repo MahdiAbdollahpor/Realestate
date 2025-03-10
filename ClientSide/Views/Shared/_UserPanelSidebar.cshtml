@@ -42,30 +42,26 @@
                                 <span>ناحیه کاربری</span>
                             </a>
                         </li>
-                        <li class="nav-item">
-                            <a asp-controller="UserPanel" asp-action="UserInfo" class="nav-link text-muted">
+                       @*  <li class="nav-item">
+                            <a asp-controller="UserPanel" asp-action="CreateProperty" class="nav-link text-muted">
                                 <i class="bi bi-person-circle"></i>
-                                <span>اطلاعات کاربری</span>
+                                <span>ثبت اجاره یا فروش ملک</span>
+                            </a>
+                        </li> *@
+                       
+                        <li class="nav-item">
+                            <a asp-controller="UserPanel" asp-action="PropertyList" class="nav-link text-muted">
+                                <i class="bi bi-person-circle"></i>
+                                <span>املاک ثبت شده </span>
                             </a>
                         </li>
-                        @* @if (userinfo.IsSeller == false)
-                        {
-                            <li class="nav-item">
-                                <a asp-controller="UserPanel" asp-action="RequestForSalePanel" class="nav-link text-muted">
-                                    <i class="bi bi-person-circle"></i>
-                                    <span>درخواست پنل فروشندگی</span>
-                                </a>
-                            </li>
-                        } *@
-
-
-
-                        @*      <li class="nav-item">
-                        <a href="order.html" class="nav-link text-muted">
-                        <i class="bi bi-basket-fill"></i>
-                        <span>سفارش ها</span>
-                        </a>
-                        </li>*@
+                        
+                        <li class="nav-item">
+                            <a asp-controller="UserPanel" asp-action="SavedProperty" class="nav-link text-muted">
+                                <i class="bi bi-person-circle"></i>
+                                <span>املاک ذخیره شده  </span>
+                            </a>
+                        </li>
 
                     </ul>
                 </div>
@@ -74,30 +70,7 @@
         </div>
 
 
-       @*  @if (userinfo.IsSeller == true)
-        {
-            <div class="ui-box">
-                <div class="ui-box-item">
-                    <div class="ui-box-item-title" style="padding: 15px;">
-                        <h4 class="fw-bold">
-                            پنل فروشندگی
-                        </h4>
-                    </div>
-                    <div class="ui-box-item-desc p-0">
-                        <ul class="nav flex-column sidebar-menu">
-                            <li class="nav-item">
-                                <a asp-controller="UserPanel" asp-action="ProductList" class="nav-link text-muted">
-                                    <i class="bi bi-person-circle"></i>
-                                    <span>مدیریت محصولات</span>
-                                </a>
-                            </li>
-
-                        </ul>
-                    </div>
-
-                </div>
-            </div>
-        } *@
+       
 
 
 
