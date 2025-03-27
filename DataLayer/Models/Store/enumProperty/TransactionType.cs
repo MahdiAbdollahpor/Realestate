@@ -1,14 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer.Models.Store.enumProperty
 {
     public enum TransactionType
     {
-        Rent, // اجاره
-        Sale // فروش
+        [Display(Name = "اجاره")]
+        Rent,
+
+        [Display(Name = "فروش")]
+        Sale 
     }
 }

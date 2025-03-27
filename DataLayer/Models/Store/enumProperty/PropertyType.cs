@@ -1,17 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer.Models.Store.enumProperty
 {
     public enum PropertyType
     {
-        HouseWithYard, // خانه حیاط دار
-        Apartment, // آپارتمان
-        Shop, // مغازه
-        Office, // دفتر
-        Villa, // ویلا
+        [Display(Name = "خانه حیاط دار")]
+        HouseWithYard,
+
+        [Display(Name = "آپارتمان")]
+        Apartment,
+
+        [Display(Name = "مغازه")]
+        Shop,
+
+        [Display(Name = "دفتر")]
+        Office,
+
+        [Display(Name = "ویلا")]
+        Villa
     }
 }

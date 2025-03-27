@@ -44,6 +44,8 @@ builder.Services.AddDbContext<ApplicationDbContext>(option => option.UseSqlServe
 
 builder.Services.AddScoped<IIdentityService, IdentityService>();
 builder.Services.AddScoped<ISmsSender, SmsSender>();
+builder.Services.AddScoped<IFileUploader, FileUploader>();
+builder.Services.AddScoped<IStoreService, StoreService>();
 
 var app = builder.Build();
 

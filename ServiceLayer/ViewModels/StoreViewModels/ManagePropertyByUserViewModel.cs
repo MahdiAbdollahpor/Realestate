@@ -1,10 +1,6 @@
 ﻿using DataLayer.Models.Store.enumProperty;
-using System;
-using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceLayer.ViewModels.StoreViewModels
 {
@@ -60,8 +56,15 @@ namespace ServiceLayer.ViewModels.StoreViewModels
         [Required(AllowEmptyStrings = false, ErrorMessage = "لطفا {0} را وارد نمایید")]
         public bool Bathroom { get; set; } // حمام و دستشویی ؟
 
-        [Display(Name = "تصویر پیش فرض")]
-        [Required(AllowEmptyStrings = false, ErrorMessage = "لطفا {0} را وارد نمایید")]
-        public string IndexImage1 { get; set; }
+        [Display(Name = "تصویر اصلی")]
+        [Required(ErrorMessage = "لطفا {0} را انتخاب نمایید")]
+        public IFormFile IndexImage1 { get; set; }
+
+        [Display(Name = "تصویر دوم")]
+        public IFormFile IndexImage2 { get; set; }
+
+        [Display(Name = "تصویر سوم")]
+        public IFormFile IndexImage3 { get; set; }
+        public int UserId { get; set; }
     }
 }

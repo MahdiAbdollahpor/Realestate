@@ -1,0 +1,165 @@
+﻿@using DataLayer.Models.Store.enumProperty
+@using ServiceLayer.Services.Interfaces
+@using ServiceLayer.ViewModels.StoreViewModels
+@using System.Reflection
+@using System.ComponentModel.DataAnnotations
+@inject IIdentityService _identityService;
+@model ManagePropertyByUserViewModel
+@{
+    ViewData["Title"] = "CreateProperty";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<section class="cta section-padding">
+    <div class="container">
+    </div>
+</section>
+
+<section>
+    <div class="row">
+        <partial name="_UserPanelSidebar" />
+        <div class="col-lg-9">
+<div class="container">
+    <h2>مدیریت ملک</h2>
+                <form asp-action="CreatePropertyByUser" method="post" enctype="multipart/form-data">
+       <div class="row">
+                        <input hidden id="editUserId" asp-for="UserId" value="@_identityService.GetUserIdByPhoneNumber(User.Identity.Name)" />
+                        <div class="form-group col-6">
+                            <label asp-for="Type" class="control-label"></label>
+                            <select asp-for="Type" asp-items="Html.GetEnumSelectList<PropertyType>()" class="form-control"></select>
+                            <span asp-validation-for="Type" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group col-6">
+                            <label asp-for="TransactionType" class="control-label"></label>
+                            <select asp-for="TransactionType" asp-items="Html.GetEnumSelectList<TransactionType>()" class="form-control"></select>
+                            <span asp-validation-for="TransactionType" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Address" class="control-label"></label>
+                            <input asp-for="Address" class="form-control" />
+                            <span asp-validation-for="Address" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Price" class="control-label"></label>
+                            <input asp-for="Price" class="form-control" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Description" class="control-label"></label>
+                            <textarea asp-for="Description" class="form-control"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Meterage" class="control-label"></label>
+                            <input asp-for="Meterage" class="form-control" />
+                            <span asp-validation-for="Meterage" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Floor" class="control-label"></label>
+                            <input asp-for="Floor" class="form-control" />
+                            <span asp-validation-for="Floor" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="Room" class="control-label"></label>
+                            <input asp-for="Room" class="form-control" />
+                            <span asp-validation-for="Room" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <label asp-for="Parking" class="form-check-label"></label>
+                            <input asp-for="Parking" class="form-check-input" />
+                            <span asp-validation-for="Parking" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <label asp-for="warehouse" class="form-check-label"></label>
+                            <input asp-for="warehouse" class="form-check-input" />
+                            <span asp-validation-for="warehouse" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <label asp-for="elevator" class="form-check-label"></label>
+                            <input asp-for="elevator" class="form-check-input" />
+                            <span asp-validation-for="elevator" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group form-check">
+                            <label asp-for="Bathroom" class="form-check-label"></label>
+                            <input asp-for="Bathroom" class="form-check-input" />
+                            <span asp-validation-for="Bathroom" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="IndexImage1" class="control-label"></label>
+                            <input asp-for="IndexImage1" type="file" class="form-control" accept="image/*" />
+                            <span asp-validation-for="IndexImage1" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="IndexImage2" class="control-label"></label>
+                            <input asp-for="IndexImage2" type="file" class="form-control" accept="image/*" />
+                            <span asp-validation-for="IndexImage2" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label asp-for="IndexImage3" class="control-label"></label>
+                            <input asp-for="IndexImage3" type="file" class="form-control" accept="image/*" />
+                            <span asp-validation-for="IndexImage3" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <input type="submit" value="ثبت" class="btn btn-primary" />
+                        </div>
+       </div>
+    </form>
+</div>
+    </div>
+    </div>
+</section>
+
+<section class="bottom section-padding">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-xl-5 col-sm-6 col-md-3">
+                <div class="bottom-list">
+                    <h3>Helpful Links</h3>
+                    <ul>
+                        <li>
+                            <a href="18_Half_Map.html" title="">Half Map</a>
+                        </li>
+                        <li>
+                            <a href="#" title="">Register</a>
+                        </li>
+                        <li>
+                            <a href="#" title="">Pricing</a>
+                        </li>
+                        <li>
+                            <a href="#" title="">Add Listing</a>
+                        </li>
+                    </ul>
+                </div><!--bottom-list end-->
+            </div>
+            <div class="col-xl-5 col-sm-12 col-md-5 pl-0">
+                <div class="bottom-desc">
+                    <h3>Aditional Information</h3>
+                    <p>
+                        Nam nec tellus a odio tincidunt auctor a ornare odio. Sed non mauris vitae erat consequat auctor eu in elit. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial"></partial>
+}

@@ -1,15 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace DataLayer.Models.Store.enumProperty
 {
     public enum RequestStatus
     {
-        Pending, // در انتظار تایید
-        Approved, // تایید شده
-        Rejected // رد شده
+        [Display(Name = "در انتظار تایید")]
+        Pending,
+
+        [Display(Name = "تایید شده")]
+        Approved,
+
+        [Display(Name = "رد شده")]
+        Rejected 
     }
 }

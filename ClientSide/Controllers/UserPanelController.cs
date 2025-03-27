@@ -1,8 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ServiceLayer.PublicClasses;
 using ServiceLayer.Services.Interfaces;
 using ServiceLayer.ViewModels.IdentityViewModels;
+using ServiceLayer.ViewModels.StoreViewModels;
 
 namespace ClientSide.Controllers
 {
@@ -11,11 +13,13 @@ namespace ClientSide.Controllers
     public class UserPanelController : Controller
     {
         private readonly IIdentityService _identityService;
-       
+        private readonly IStoreService _storeService;
 
-        public UserPanelController(IIdentityService identityService)
+
+        public UserPanelController(IIdentityService identityService, IStoreService storeService)
         {
             _identityService = identityService;
+            _storeService = storeService;
         }
         public IActionResult Dashboard()
         {
@@ -64,9 +68,33 @@ namespace ClientSide.Controllers
             return View(model);
         }
 
-        public IActionResult CreateProperty ()
+        [HttpGet]
+        [Route("CreateProperty")]
+        public IActionResult CreatePropertyByUser()
         {
             return View();
         }
+
+        [HttpPost]
+        [Route("CreateProperty")]
+        public IActionResult CreatePropertyByUser(ManagePropertyByUserViewModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                bool res = _storeService.CreateProperty(model);
+                if(res)
+                {
+                    TempData["success"] = "ثبت  با موفقیت انجام شد";
+                    //return RedirectToAction("PropertyList", "UserPanel");
+                    return RedirectToAction("Dashboard", "UserPanel");
+                }
+                TempData["error"] = "مشکلی در ثبت به وجود آمده است خواهشا دوباره تکرار کنید";
+                return View(model);
+            }
+
+            TempData["error"] = "اطلاعات وارد شده صحیح نمی باشد";
+            return View(model);
+        }
+
     }
 }
